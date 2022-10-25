@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name" translatable="false">Musicompose 2</string>
+
+    <string name="app_name" translatable="false">Ringtone</string>
 
     <string name="ok">@android:string/ok</string>
     <string name="off">Off</string>
@@ -72,7 +73,15 @@
     <string name="privacy">privacy policy</string>
     <string name="success_ringtone">Ringtone set Success</string>
     <string name="success_alarm">Alarme Set Success</string>
-    <string name="ad_id_banner">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="ad_id_interstitial">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="Ringtone">Ringtone</string>
+    <string name="Alarm">Alarm</string>
+    <string name="Notifications">Notifications</string>
+
+    <string name="admob_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="ad_id_banner" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ad_id_interstitial" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="ad_open_app" translatable="false">ca-app-pub-3940256099942544/3419835294</string>
+
+
 
 </resources>

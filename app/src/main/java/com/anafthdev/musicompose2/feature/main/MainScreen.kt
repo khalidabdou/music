@@ -1,5 +1,7 @@
 package com.anafthdev.musicompose2.feature.main
 
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -18,7 +20,6 @@ import androidx.navigation.NavController
 import com.anafthdev.musicompose2.R
 import com.anafthdev.musicompose2.data.MusicomposeDestination
 import com.anafthdev.musicompose2.data.SortType
-import com.anafthdev.musicompose2.feature.admob.AdvertView
 import com.anafthdev.musicompose2.feature.home.HomeScreen
 import com.anafthdev.musicompose2.feature.musicompose.LocalMusicomposeState
 import com.anafthdev.musicompose2.foundation.common.LocalSongController
@@ -35,15 +36,7 @@ fun MainScreen(
     navController: NavController
 ) {
 
-    val tabPages = listOf(
-        stringResource(id = R.string.song),
-        stringResource(id = R.string.album),
-        stringResource(id = R.string.artist),
-        stringResource(id = R.string.playlist)
-    )
-
     val songController = LocalSongController.current
-    val musicomposeState = LocalMusicomposeState.current
 
     val scope = rememberCoroutineScope()
     val pagerState = rememberPagerState()
@@ -102,7 +95,7 @@ fun MainScreen(
                             options = listOf(
                                 stringResource(id = R.string.rate),
                                 stringResource(id = R.string.privacy),
-                                stringResource(id = R.string.sort_by)
+
                             ),
                             onDismissRequest = {
                                 isMoreOptionPopupShowed = false
@@ -110,21 +103,13 @@ fun MainScreen(
                             onClick = { i ->
                                 when (i) {
                                     0 -> {
-                                        scope.launch {
-                                            songController?.hideBottomMusicPlayer()
-                                            delay(800)
-                                            navController.navigate(
-                                                MusicomposeDestination.BottomSheet.Sort.createRoute(
-                                                    type = when (pagerState.currentPage) {
-                                                        0 -> SortType.SONG
-                                                        1 -> SortType.ALBUM
-                                                        2 -> SortType.ARTIST
-                                                        3 -> SortType.PLAYLIST
-                                                        else -> SortType.SONG
-                                                    }
-                                                )
-                                            )
-                                        }
+                                       Log.d("MENU","0")
+                                    }
+                                    1->{
+                                        Log.d("MENU","1")
+                                    }
+                                    2->{
+                                        Log.d("MENU","2")
                                     }
                                 }
                             },

@@ -1,0 +1,13 @@
+{
+  "listItems":[
+    {
+      "type":"TEXT",
+      "message":"First Item"
+    },{
+      "type":"IMAGE"
+    },{
+      "type":"BUTTON",
+      "message":"My Button"
+    }
+  ]
+}

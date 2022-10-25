@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Ringtone</string>
+    <string name="ok">ok</string>
+    <string name="off">À l\'arrêt</string>
+    <string name="song">Chanson</string>
+    <string name="dark">Sombre</string>
+    <string name="edit">Éditer</string>
+    <string name="deny">Refuser</string>
+    <string name="open">Ouvert</string>
+    <string name="close">proche</string>
+    <string name="allow">Permettre</string>
+    <string name="theme">Thème</string>
+    <string name="light">Lumière</string>
+    <string name="album">Album</string>
+    <string name="n_sec">%1$s secondes</string>
+    <string name="added">Ajoutée</string>
+    <string name="delete">Effacer</string>
+    <string name="artist">Artiste</string>
+    <string name="cancel">Annuler</string>
+    <string name="n_song">Chanson %1$s</string>
+    <string name="sort_by">Trier par</string>
+    <string name="setting">Paramètre</string>
+    <string name="unknown">Inconnue</string>
+    <string name="x_album">Album : %1$s</string>
+    <string name="x_artist">Artiste : %1$s</string>
+    <string name="favorite">Favori</string>
+    <string name="playlist">Playlist</string>
+    <string name="language">Langue</string>
+    <string name="add_song">Ajouter une chanson</string>
+    <string name="n_second">%1$s seconde</string>
+    <string name="play_all">Jouer à tous</string>
+    <string name="play_song">Jouer la chanson</string>
+    <string name="song_name">Titre de chanson</string>
+    <string name="set_timer">Régler la minuterie</string>
+    <string name="date_added">Date ajoutée</string>
+    <string name="album_name">Nom de l\'album</string>
+    <string name="scan_options">Options de numérisation</string>
+    <string name="my_playlist">Ma liste de lecture</string>
+    <string name="change_name">Changer de nom</string>
+    <string name="artist_name">Nom d\'artiste</string>
+    <string name="just_played">Je viens de jouer</string>
+    <string name="now_playing">Lecture en cours</string>
+    <string name="timer_is_set">La minuterie est réglée</string>
+    <string name="media_access">Accès aux médias</string>
+    <string name="new_playlist">Nouvelle playlist</string>
+    <string name="dynamic_dark">Sombre dynamique</string>
+    <string name="sixty_minute">60 minutes</string>
+    <string name="thirty_minute">30 minutes</string>
+    <string name="ninety_minute">90 minutes</string>
+    <string name="dynamic_light">Lumière dynamique</string>
+    <string name="playlist_name">Nom de la liste de lecture</string>
+    <string name="timer_disabled">Minuterie désactivée</string>
+    <string name="rename_playlist">Renommer la liste de lecture</string>
+    <string name="number_of_songs">Nombre de chansons</string>
+    <string name="add_to_playlist">Ajouter à la playlist</string>
+    <string name="language_summary">Sélectionnez la langue que vous utilisez</string>
+    <string name="added_to_playlist">Ajouté à la liste de lecture</string>
+    <string name="add_favorite_song">Ajouter une chanson préférée</string>
+    <string name="search_placeholder">Chanson, artiste ou album</string>
+    <string name="enter_playlist_name">Entrez le nom de la liste de lecture</string>
+    <string name="select_your_language">choisissez votre langue</string>
+    <string name="media_access_message">
+Cette application nécessite une autorisation de stockage externe en lecture pour fonctionner normalement
+</string>
+    <string name="skip_forward_or_backward">Sauter en avant/en arrière</string>
+    <string name="forward_backward_duration">Durée avant/arrière</string>
+    <string name="permission_denied_by_user">Autorisation refusée par l\'utilisateur</string>
+    <string name="stop_audio_within_n_minutes">Arrêter le son dans %1$s minutes</string>
+    <string name="skip_tracks_smaller_than_100_kb">Ignorer les pistes inférieures à 100 Ko</string>
+    <string name="skip_tracks_shorter_than_60_seconds">Ignorer les pistes de moins de 60 secondes</string>
+    <string name="permission_denied_permanently_message">
+Autorisation refusée, accédez aux paramètres pour l\'autoriser
+</string>
+    <string name="Ringtone">Sonnerie</string>
+    <string name="Alarm">Alarme</string>
+    <string name="Notifications">Avis</string>
+    <string name="rate">évaluez nous</string>
+    <string name="privacy">politique de confidentialité</string>
+    <string name="success_ringtone">Ensemble de sonneries Succès</string>
+    <string name="success_alarm">Réussite du réglage de l\'alarme</string>
+
+
+
+</resources>

@@ -25,6 +25,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.anafthdev.musicompose2.R
 import com.anafthdev.musicompose2.data.model.Song
+import com.anafthdev.musicompose2.feature.admob.AdvertView
 import com.anafthdev.musicompose2.foundation.theme.circle
 import com.anafthdev.musicompose2.foundation.theme.no_shape
 import com.google.ads.AdSize.BANNER
@@ -74,7 +75,7 @@ fun BottomMusicPlayer(
 						.weight(1f)
 				) {
 					Text(
-						maxLines = 2,
+						maxLines = 1,
 						text = currentSong.title,
 						overflow = TextOverflow.Ellipsis,
 						style = MaterialTheme.typography.titleSmall.copy(
@@ -85,7 +86,7 @@ fun BottomMusicPlayer(
 					Spacer(modifier = Modifier.height(8.dp))
 
 					Text(
-						maxLines = 2,
+						maxLines = 1,
 						overflow = TextOverflow.Ellipsis,
 						text = currentSong.artist,
 						style = MaterialTheme.typography.bodySmall,
@@ -114,6 +115,7 @@ fun BottomMusicPlayer(
 					}
 				)
 			}
+			AdvertView()
 
 		}
 

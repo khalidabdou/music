@@ -19,8 +19,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.anafthdev.musicompose2.data.MusicomposeDestination
 import com.anafthdev.musicompose2.data.model.Song
-import com.anafthdev.musicompose2.feature.admob.AdvertView
-import com.anafthdev.musicompose2.feature.admob.loadInterstitial
 import com.anafthdev.musicompose2.feature.admob.showInterstitial
 import com.anafthdev.musicompose2.feature.musicompose.LocalMusicomposeState
 import com.anafthdev.musicompose2.foundation.common.LocalSongController
@@ -81,7 +79,7 @@ fun HomeScreen(navController: NavController) {
 			)
 		}
 
-		
+
 		// BottomMusicPlayer padding
 		item {
 			Spacer(modifier = Modifier.height(BottomMusicPlayerDefault.Height))

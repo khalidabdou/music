@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Ringtone</string>
+    <string name="ok">android: string /ok</string>
+    <string name="off">عن</string>
+    <string name="song">أغنية</string>
+    <string name="dark">مظلم</string>
+    <string name="edit">يحرر</string>
+    <string name="deny">ينكر</string>
+    <string name="open">فتح</string>
+    <string name="close">قريب</string>
+    <string name="allow">السماح</string>
+    <string name="theme">سمة</string>
+    <string name="light">خفيفة</string>
+    <string name="album">الألبوم</string>
+    <string name="n_sec">٪ 1 $ s ثانية</string>
+    <string name="added">مضاف</string>
+    <string name="delete">حذف</string>
+    <string name="artist">فنان</string>
+    <string name="cancel">يلغي</string>
+    <string name="n_song">٪ 1 $ s أغنية</string>
+    <string name="sort_by">صنف حسب</string>
+    <string name="setting">ضبط</string>
+    <string name="unknown">مجهول</string>
+    <string name="x_album">الألبوم:٪ 1 $ s</string>
+    <string name="x_artist">الفنان:٪ 1 $ s</string>
+    <string name="favorite">مفضل</string>
+    <string name="playlist">قائمة التشغيل</string>
+    <string name="language">لغة</string>
+    <string name="add_song">أضف أغنية</string>
+    <string name="n_second">٪ 1 $ s ثانية</string>
+    <string name="play_all">لعب كل</string>
+    <string name="play_song">تشغيل الأغنية</string>
+    <string name="song_name">إسم الأغنية</string>
+    <string name="set_timer">توقيت مجموعة</string>
+    <string name="date_added">تم إضافة التاريخ</string>
+    <string name="album_name">اسم الألبوم</string>
+    <string name="scan_options">اختيارات المسح</string>
+    <string name="my_playlist">بلدي قائمة التشغيل</string>
+    <string name="change_name">تغيير الإسم</string>
+    <string name="artist_name">اسم فنان</string>
+    <string name="just_played">لعبت للتو</string>
+    <string name="now_playing">الان العب</string>
+    <string name="timer_is_set">تم ضبط الموقت</string>
+    <string name="media_access">الوصول إلى الوسائط</string>
+    <string name="new_playlist">قائمة تشغيل جديدة</string>
+    <string name="dynamic_dark">الظلام الديناميكي</string>
+    <string name="sixty_minute">60 مليون طن</string>
+    <string name="thirty_minute">30 مليون</string>
+    <string name="ninety_minute">90 مليون</string>
+    <string name="dynamic_light">ضوء ديناميكي</string>
+    <string name="playlist_name">اسم قائمة التشغيل</string>
+    <string name="timer_disabled">الموقت معطل</string>
+    <string name="rename_playlist">إعادة تسمية قائمة التشغيل</string>
+    <string name="number_of_songs">عدد الأغاني</string>
+    <string name="add_to_playlist">أضف إلى قائمة التشغيل</string>
+    <string name="language_summary">حدد اللغة التي تستخدمها</string>
+    <string name="added_to_playlist">تمت الإضافة إلى قائمة التشغيل</string>
+    <string name="add_favorite_song">أضف الأغنية المفضلة</string>
+    <string name="search_placeholder">أغنية أو فنان أو ألبوم</string>
+    <string name="enter_playlist_name">أدخل اسم قائمة التشغيل</string>
+    <string name="select_your_language">اختر لغتك</string>
+    <string name="media_access_message">
+يتطلب هذا التطبيق قراءة إذن التخزين الخارجي ليعمل بشكل طبيعي
+</string>
+    <string name="skip_forward_or_backward">تخطي للأمام /للخلف</string>
+    <string name="forward_backward_duration">المدة إلى الأمام /الخلف</string>
+    <string name="permission_denied_by_user">تم رفض الإذن من قبل المستخدم</string>
+    <string name="stop_audio_within_n_minutes">إيقاف الصوت في غضون٪ 1 $ s دقيقة</string>
+    <string name="skip_tracks_smaller_than_100_kb">تخطي المسارات التي يقل حجمها عن 100 كيلوبايت</string>
+    <string name="skip_tracks_shorter_than_60_seconds">تخطي المسارات التي تقل مدتها عن 60 ثانية</string>
+    <string name="permission_denied_permanently_message">تم رفض الإذن ، انتقل إلى الإعدادات للسماح بذلك</string>
+    <string name="rate">قيمنا</string>
+    <string name="privacy">سياسة الخصوصية</string>
+    <string name="success_ringtone">ضبط نغمة الرنين بنجاح</string>
+    <string name="success_alarm">ضبط الإنذار بنجاح</string>
+    <string name="Ringtone">نغمة</string>
+    <string name="Alarm">منبه</string>
+    <string name="Notifications">إشعارات</string>
+
+</resources>

@@ -16,7 +16,7 @@
       },
       album_image:{
         width: "spread",
-        height: 200,
+        height: 150,
         start: ['parent', 'start'],
         end: ['parent', 'end'],
         top: ['top_bar', 'bottom'],
@@ -26,7 +26,7 @@
         height: 50,
         start: ['parent', 'start'],
         end: ['parent', 'end'],
-        top: ['parent', 'bottom'],
+        top: ['column_other', 'bottom'],
       },
       column_title_artist: {
         width: "spread",

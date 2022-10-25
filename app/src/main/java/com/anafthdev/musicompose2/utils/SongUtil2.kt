@@ -20,11 +20,7 @@ import com.anafthdev.musicompose2.data.model.Song
 import com.anafthdev.musicompose2.runtime.MainActivity
 import java.util.*
 
-data class SongDetails(
-    var raw:Int,
-    val title:String,
-    val desc:String
-)
+
 object SongUtil2 {
 
     fun getSong(
@@ -34,21 +30,7 @@ object SongUtil2 {
     ): List<Song> {
 
         val songList = ArrayList<Song>()
-
-        val rawSongs=listOf<SongDetails>(
-            SongDetails(R.raw.alarm,
-            "Music 1","Description 1"),
-            SongDetails(R.raw.music1,
-                "Ringtone 1","Description test"),
-            SongDetails(R.raw.music2,
-                "Music 3","Description 1"),
-
-
-        )
-        //youDesirePermissionCode(context as Activity)
-
-
-
+        val rawSongs=Ringtones().getAllRingtone()
 
         rawSongs.forEach { Mysong->
             val mediaPath =
@@ -59,11 +41,6 @@ object SongUtil2 {
             val sponsorArtist = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST)
             val audioTitle = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE)
             val image = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DATE)
-
-            Log.d("MUSICURLL",duration.toString())
-            Log.d("MUSICURLL",sponsorArtist.toString())
-
-
 
             val song = Song(
                 audioID = Mysong.raw.toLong(),
@@ -78,13 +55,8 @@ object SongUtil2 {
                 path = "android.resource://com.anafthdev.musicompose2/" + Mysong.raw,
                 dateAdded = 10000
             )
-
-
             songList.add(song)
-
         }
-
-        //RingtoneManager.setActualDefaultRingtoneUri(context, RingtoneManager.TYPE_RINGTONE, Uri.parse("android.resource://" + context.getPackageName().toString() + "/raw/music2.mp3" ));
 
         return songList
     }

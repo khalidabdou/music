@@ -83,7 +83,7 @@ class AppDatastore @Inject constructor(private val context: Context) {
 	}
 	
 	val getLanguage: Flow<Language> = context.datastore.data.map { preferences ->
-		Language.values()[preferences[language] ?: Language.INDONESIAN.ordinal]
+		Language.values()[preferences[language] ?: Language.ENGLISH.ordinal]
 	}
 	
 	val getUiMode: Flow<UiMode> = context.datastore.data.map { preferences ->

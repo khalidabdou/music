@@ -1,7 +1,9 @@
 package com.anafthdev.musicompose2.feature.admob
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,16 +25,16 @@ fun AdvertView(modifier: Modifier = Modifier) {
     if (isInEditMode) {
         Text(
             modifier = modifier
-                .fillMaxWidth()
+                .fillMaxSize()
                 .background(Red)
                 .padding(horizontal = 2.dp, vertical = 6.dp),
             textAlign = TextAlign.Center,
             color = White,
-            text = "Advert Here",
+            text = "",
         )
     } else {
         AndroidView(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier.fillMaxWidth().height(70.dp).padding(6.dp),
             factory = { context ->
                 AdView(context).apply {
                     adSize = AdSize.BANNER
