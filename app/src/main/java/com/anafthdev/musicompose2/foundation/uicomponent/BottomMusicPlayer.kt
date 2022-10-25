@@ -27,6 +27,8 @@ import com.anafthdev.musicompose2.R
 import com.anafthdev.musicompose2.data.model.Song
 import com.anafthdev.musicompose2.foundation.theme.circle
 import com.anafthdev.musicompose2.foundation.theme.no_shape
+import com.google.ads.AdSize.BANNER
+import com.google.android.gms.ads.AdSize
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -51,66 +53,70 @@ fun BottomMusicPlayer(
 			containerColor = MaterialTheme.colorScheme.primaryContainer
 		),
 		modifier = modifier
-			.height(BottomMusicPlayerDefault.Height)
+			.height(BottomMusicPlayerDefault.Height+ BANNER.height.dp)
 	) {
-		Row(
-			verticalAlignment = Alignment.CenterVertically,
-			modifier = Modifier
-				.padding(16.dp)
-				.fillMaxWidth()
-		) {
-			AlbumImage(
-				isPlaying = isPlaying,
-				path = currentSong.albumPath
-			)
-			
-			Column(
-				verticalArrangement = Arrangement.SpaceEvenly,
+		Column {
+			Row(
+				verticalAlignment = Alignment.CenterVertically,
 				modifier = Modifier
-					.padding(horizontal = 8.dp)
-					.weight(1f)
+					.padding(16.dp)
+					.fillMaxWidth()
 			) {
-				Text(
-					maxLines = 2,
-					text = currentSong.title,
-					overflow = TextOverflow.Ellipsis,
-					style = MaterialTheme.typography.titleSmall.copy(
-						fontWeight = FontWeight.SemiBold
+				AlbumImage(
+					isPlaying = isPlaying,
+					path = currentSong.albumPath
+				)
+
+				Column(
+					verticalArrangement = Arrangement.SpaceEvenly,
+					modifier = Modifier
+						.padding(horizontal = 8.dp)
+						.weight(1f)
+				) {
+					Text(
+						maxLines = 2,
+						text = currentSong.title,
+						overflow = TextOverflow.Ellipsis,
+						style = MaterialTheme.typography.titleSmall.copy(
+							fontWeight = FontWeight.SemiBold
+						)
 					)
-				)
-				
-				Spacer(modifier = Modifier.height(8.dp))
-				
-				Text(
-					maxLines = 2,
-					overflow = TextOverflow.Ellipsis,
-					text = currentSong.artist,
-					style = MaterialTheme.typography.bodySmall,
-				)
-			}
-			
-			IconButton(
-				onClick = onFavoriteClicked
-			) {
-				Image(
-					painter = painterResource(
-						id = if (currentSong.isFavorite) R.drawable.ic_favorite_selected
-						else R.drawable.ic_favorite_unselected
-					),
-					contentDescription = null
-				)
-			}
-			
-			Spacer(modifier = Modifier.width(8.dp))
-			
-			PlayPauseButton(
-				progress = progress,
-				isPlaying = isPlaying,
-				onClick = {
-					onPlayPauseClicked(!isPlaying)
+
+					Spacer(modifier = Modifier.height(8.dp))
+
+					Text(
+						maxLines = 2,
+						overflow = TextOverflow.Ellipsis,
+						text = currentSong.artist,
+						style = MaterialTheme.typography.bodySmall,
+					)
 				}
-			)
+
+				IconButton(
+					onClick = onFavoriteClicked
+				) {
+					Image(
+						painter = painterResource(
+							id = if (currentSong.isFavorite) R.drawable.ic_favorite_selected
+							else R.drawable.ic_favorite_unselected
+						),
+						contentDescription = null
+					)
+				}
+
+				Spacer(modifier = Modifier.width(8.dp))
+
+				PlayPauseButton(
+					progress = progress,
+					isPlaying = isPlaying,
+					onClick = {
+						onPlayPauseClicked(!isPlaying)
+					}
+				)
+			}
+
 		}
+
 	}
 }
 

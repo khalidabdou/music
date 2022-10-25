@@ -16,10 +16,17 @@
       },
       album_image:{
         width: "spread",
-        height: 256,
+        height: 200,
         start: ['parent', 'start'],
         end: ['parent', 'end'],
         top: ['top_bar', 'bottom'],
+      },
+      adView:{
+        width: "spread",
+        height: 50,
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        top: ['parent', 'bottom'],
       },
       column_title_artist: {
         width: "spread",

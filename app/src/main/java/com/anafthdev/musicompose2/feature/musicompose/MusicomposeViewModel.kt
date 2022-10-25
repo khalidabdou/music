@@ -5,13 +5,25 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.lifecycle.viewModelScope
+import androidx.media3.common.AdPlaybackState
 import com.anafthdev.musicompose2.feature.musicompose.environment.MusicomposeEnvironment
 import com.anafthdev.musicompose2.foundation.service.MediaPlayerService
 import com.anafthdev.musicompose2.foundation.viewmodel.StatefulViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+
+
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 @SuppressLint("StaticFieldLeak")
@@ -22,6 +34,7 @@ class MusicomposeViewModel @Inject constructor(
 	MusicomposeState(),
 	environment
 ) {
+
 	
 	private val serviceIntent = Intent(context, MediaPlayerService::class.java).apply {
 		putExtra("musicomposeState", state.value)

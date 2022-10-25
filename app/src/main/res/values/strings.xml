@@ -68,5 +68,11 @@
     <string name="skip_tracks_smaller_than_100_kb">Skip tracks smaller than 100 KB</string>
     <string name="skip_tracks_shorter_than_60_seconds">Skip tracks shorter than 60 seconds</string>
     <string name="permission_denied_permanently_message">Permission denied, go to settings to allow it</string>
+    <string name="rate">rate us</string>
+    <string name="privacy">privacy policy</string>
+    <string name="success_ringtone">Ringtone set Success</string>
+    <string name="success_alarm">Alarme Set Success</string>
+    <string name="ad_id_banner">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ad_id_interstitial">ca-app-pub-3940256099942544/1033173712</string>
 
 </resources>

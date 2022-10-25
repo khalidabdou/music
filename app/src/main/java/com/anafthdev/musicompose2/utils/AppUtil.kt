@@ -9,8 +9,12 @@ import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import com.anafthdev.musicompose2.foundation.extension.deviceLocale
+import java.io.FileOutputStream
+import java.io.InputStream
 
 object AppUtil {
+
+	val ENABLE_BUTTONS=true
 	
 	val collator: Collator = Collator.getInstance(deviceLocale).apply {
 		strength = Collator.PRIMARY
@@ -27,5 +31,8 @@ object AppUtil {
 	fun Any?.toast(length: Int = Toast.LENGTH_SHORT) {
 		Toast.makeText(LocalContext.current, this.toString(), length).show()
 	}
-	
+
+
+
+
 }

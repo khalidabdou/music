@@ -44,8 +44,8 @@ fun MoreOptionItem(
 			overflow = TextOverflow.Ellipsis,
 			text = type.getLabel(
 				when (type) {
-					MoreOptionMusicPlayerSheetType.ALBUM -> song.album
-					MoreOptionMusicPlayerSheetType.ARTIST -> song.artist
+					MoreOptionMusicPlayerSheetType.SET_RINGTONE -> song.album
+					MoreOptionMusicPlayerSheetType.SET_ALARM -> song.artist
 					else -> ""
 				}
 			),

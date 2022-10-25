@@ -4,7 +4,7 @@ sealed class MusicomposeDestination(open val route: String) {
 
 	object Main: MusicomposeDestination("main")
 	
-	object Search: MusicomposeDestination("search")
+	//object Search: MusicomposeDestination("search")
 	
 	object Setting: MusicomposeDestination("setting")
 	
@@ -12,9 +12,9 @@ sealed class MusicomposeDestination(open val route: String) {
 	
 	object Theme: MusicomposeDestination("theme")
 	
-	object ScanOptions: MusicomposeDestination("scan-options")
+	//object ScanOptions: MusicomposeDestination("scan-options")
 	
-	object Album: MusicomposeDestination("album/{albumID}") {
+	/*object Album: MusicomposeDestination("album/{albumID}") {
 		fun createRoute(albumID: String): String {
 			return "album/$albumID"
 		}
@@ -36,7 +36,7 @@ sealed class MusicomposeDestination(open val route: String) {
 		fun createRoute(type: SongSelectorType, playlistID: Int): String {
 			return "song-selector/${type.ordinal}/$playlistID"
 		}
-	}
+	}*/
 	
 	class BottomSheet {
 		object MusicPlayer: MusicomposeDestination("music-player")

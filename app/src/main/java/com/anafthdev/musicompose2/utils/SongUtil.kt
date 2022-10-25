@@ -1,10 +1,13 @@
 package com.anafthdev.musicompose2.utils
 
+import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
 import android.provider.MediaStore
+import android.util.Log
 import com.anafthdev.musicompose2.R
 import com.anafthdev.musicompose2.data.model.Song
+import java.io.File
 import kotlin.time.Duration.Companion.milliseconds
 
 object SongUtil {
@@ -18,7 +21,15 @@ object SongUtil {
 		val songList = ArrayList<Song>()
 		
 		val audioUriExternal = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-		
+		//val audioUriExternal = MediaStore.Audio.Media.getContentUri(ContentResolver.SCHEME_ANDROID_RESOURCE + File.pathSeparator + File.separator + File.separator+ context.getPackageName()+ File.separator+"raw" )
+		//val audioUriExternal =
+			//Uri.parse("android.resource://" + context.getPackageName().toString() )
+
+		//val audioUriExternal = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + File.pathSeparator + File.separator + context.getPackageName() + "/raw/"+R.raw.alarm );
+		Log.d("MUSICURL",audioUriExternal.toString())
+
+
+
 		val songProjection = listOf(
 			MediaStore.Audio.Media._ID,
 			MediaStore.Audio.Media.DISPLAY_NAME,
@@ -50,8 +61,12 @@ object SongUtil {
 			null,
 			null
 		)
+		Log.d("MUSICURL",songCursor.toString())
+
+
 		
 		if (songCursor != null) {
+
 			cursorIndexSongID = songCursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)
 			cursorIndexSongDisplayName = songCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME)
 			cursorIndexSongTitle = songCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)
@@ -94,6 +109,7 @@ object SongUtil {
 					path = path.toString(),
 					dateAdded = dateAdded
 				)
+				Log.d("MUSICURL",song.path.toString())
 				
 				when {
 					isTracksSmallerThan100KBSkipped and isTracksShorterThan60SecondsSkipped -> {
@@ -116,5 +132,6 @@ object SongUtil {
 		
 		return songList
 	}
+
 	
 }

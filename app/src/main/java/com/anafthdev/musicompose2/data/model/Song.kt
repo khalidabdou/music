@@ -23,7 +23,7 @@ data class Song(
 	@ColumnInfo(name = "isFavorite") var isFavorite: Boolean = false,
 ): Parcelable {
 	companion object {
-		val default = Song(
+		var default = Song(
 			audioID = -1L,
 			displayName = "-",
 			title = "-",

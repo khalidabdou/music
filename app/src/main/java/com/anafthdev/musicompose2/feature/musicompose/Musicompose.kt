@@ -3,7 +3,9 @@ package com.anafthdev.musicompose2.feature.musicompose
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.provider.Settings
 import android.widget.Toast
 import androidx.compose.animation.core.*
@@ -20,6 +22,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -121,7 +125,7 @@ fun Musicompose(
 			darkTheme = isSystemInDarkTheme,
 			dynamicColor = useDynamicColor
 		) {
-			PermissionRequired(
+			/*PermissionRequired(
 				permissionState = storagePermissionState,
 				permissionNotGrantedContent = {
 					StoragePermissionReasonPopup(
@@ -153,13 +157,17 @@ fun Musicompose(
 						}
 					)
 				}
-			) {
+			) {*/
+
+			//youDesirePermissionCode(context as Activity)
 				MusicomposeScreen()
-			}
+			//}
 		}
 	}
 	
 }
+
+
 
 @Composable
 private fun MusicomposeScreen() {

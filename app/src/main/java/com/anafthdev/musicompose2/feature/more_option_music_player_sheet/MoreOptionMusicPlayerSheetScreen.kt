@@ -33,10 +33,9 @@ fun MoreOptionMusicPlayerSheetScreen(
 				type = type,
 				onClick = {
 					when (type) {
-						MoreOptionMusicPlayerSheetType.ALBUM -> onAlbumClicked()
-						MoreOptionMusicPlayerSheetType.ARTIST -> onArtistClicked()
-						MoreOptionMusicPlayerSheetType.SET_TIMER -> onSetTimerClicked()
-						MoreOptionMusicPlayerSheetType.ADD_TO_PLAYLIST -> onAddToPlaylist()
+						MoreOptionMusicPlayerSheetType.SET_ALARM -> onAlbumClicked()
+						MoreOptionMusicPlayerSheetType.SET_RINGTONE -> onArtistClicked()
+
 					}
 				},
 				modifier = Modifier

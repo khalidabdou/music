@@ -18,19 +18,13 @@ import com.anafthdev.musicompose2.data.MusicomposeDestination
 import com.anafthdev.musicompose2.data.PlaylistOption
 import com.anafthdev.musicompose2.data.SongSelectorType
 import com.anafthdev.musicompose2.data.SortType
-import com.anafthdev.musicompose2.data.model.Album
-import com.anafthdev.musicompose2.data.model.Artist
+
 import com.anafthdev.musicompose2.data.model.Playlist
-import com.anafthdev.musicompose2.feature.album.album.AlbumScreen
-import com.anafthdev.musicompose2.feature.artist.artist.ArtistScreen
+
 import com.anafthdev.musicompose2.feature.language.LanguageScreen
 import com.anafthdev.musicompose2.feature.main.MainScreen
 import com.anafthdev.musicompose2.feature.music_player_sheet.MusicPlayerSheetScreen
-import com.anafthdev.musicompose2.feature.playlist.delete_playlist.DeletePlaylistScreen
-import com.anafthdev.musicompose2.feature.playlist.playlist.PlaylistScreen
-import com.anafthdev.musicompose2.feature.playlist.playlist_sheet.PlaylistSheetScreen
-import com.anafthdev.musicompose2.feature.scan_options.ScanOptionsScreen
-import com.anafthdev.musicompose2.feature.search.SearchScreen
+
 import com.anafthdev.musicompose2.feature.setting.SettingScreen
 import com.anafthdev.musicompose2.feature.song_selector.SongSelectorScreen
 import com.anafthdev.musicompose2.feature.sort_sheet.SortSheetScreen
@@ -87,9 +81,7 @@ fun MusicomposeNavHost(
 				MainScreen(navController = navController)
 			}
 			
-			composable(MusicomposeDestination.Search.route) {
-				SearchScreen(navController = navController)
-			}
+
 			
 			composable(MusicomposeDestination.Setting.route) {
 				SettingScreen(navController = navController)
@@ -103,9 +95,7 @@ fun MusicomposeNavHost(
 				ThemeScreen(navController = navController)
 			}
 			
-			composable(MusicomposeDestination.ScanOptions.route) {
-				ScanOptionsScreen(navController = navController)
-			}
+/*
 			
 			composable(
 				route = MusicomposeDestination.Album.route,
@@ -185,7 +175,7 @@ fun MusicomposeNavHost(
 					navController = navController
 				)
 			}
-			
+			*/
 			bottomSheet(MusicomposeDestination.BottomSheet.MusicPlayer.route) {
 				
 				bottomSheetLayoutConfig = bottomSheetLayoutConfig.copy(
@@ -242,11 +232,7 @@ fun MusicomposeNavHost(
 					sheetBackgroundColor = MaterialTheme.colorScheme.surfaceVariant
 				)
 				
-				PlaylistSheetScreen(
-					playlistID = playlistID,
-					option = playlistOption,
-					navController = navController
-				)
+
 			}
 			
 			bottomSheet(
@@ -264,11 +250,7 @@ fun MusicomposeNavHost(
 				bottomSheetLayoutConfig = bottomSheetLayoutConfig.copy(
 					sheetBackgroundColor = MaterialTheme.colorScheme.surfaceVariant
 				)
-				
-				DeletePlaylistScreen(
-					playlistID = playlistID,
-					navController = navController
-				)
+
 			}
 		}
 	}

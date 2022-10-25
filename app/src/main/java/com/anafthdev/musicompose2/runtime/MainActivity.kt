@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.os.IBinder
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import com.anafthdev.musicompose2.BuildConfig
@@ -24,6 +26,7 @@ import com.anafthdev.musicompose2.foundation.localized.LocalizedActivity
 import com.anafthdev.musicompose2.foundation.localized.data.OnLocaleChangedListener
 import com.anafthdev.musicompose2.foundation.service.MediaPlayerService
 import com.anafthdev.musicompose2.utils.SongUtil
+import com.anafthdev.musicompose2.utils.SongUtil2
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
@@ -35,9 +38,13 @@ class MainActivity: LocalizedActivity(), ServiceConnection {
 	
 	@Inject lateinit var appDatastore: AppDatastore
 	@Inject lateinit var repository: Repository
-	
+
+
 	private val musicomposeViewModel: MusicomposeViewModel by viewModels()
-	
+
+	//val interstitialAdState by musicomposeViewModel.interstitialAdState.collect()
+
+
 	private var mediaPlayerService: MediaPlayerService? = null
 	
 	private val songController = object: SongController {
@@ -206,7 +213,7 @@ class MainActivity: LocalizedActivity(), ServiceConnection {
 			val isTracksShorterThan60SecondsSkipped = appDatastore.isTracksShorterThan60SecondsSkipped
 				.firstOrNull() ?: true
 			
-			val songs = SongUtil.getSong(
+			val songs = SongUtil2.getSong(
 				context = this@MainActivity,
 				isTracksSmallerThan100KBSkipped = isTracksSmallerThan100KBSkipped,
 				isTracksShorterThan60SecondsSkipped = isTracksShorterThan60SecondsSkipped

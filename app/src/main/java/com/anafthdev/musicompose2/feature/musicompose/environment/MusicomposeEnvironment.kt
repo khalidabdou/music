@@ -18,7 +18,7 @@ import com.anafthdev.musicompose2.data.repository.Repository
 import com.anafthdev.musicompose2.foundation.di.DiName
 import com.anafthdev.musicompose2.foundation.extension.isNotDefault
 import com.anafthdev.musicompose2.utils.AppUtil.collator
-import com.anafthdev.musicompose2.utils.SongUtil
+import com.anafthdev.musicompose2.utils.SongUtil2
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -430,7 +430,7 @@ class MusicomposeEnvironment @Inject constructor(
 		skipTracksSmallerThan100KB: Boolean,
 		skipTracksShorterThan60Seconds: Boolean
 	) {
-		val songs = SongUtil.getSong(
+		val songs = SongUtil2.getSong(
 			context = context,
 			isTracksSmallerThan100KBSkipped = skipTracksSmallerThan100KB,
 			isTracksShorterThan60SecondsSkipped = skipTracksShorterThan60Seconds

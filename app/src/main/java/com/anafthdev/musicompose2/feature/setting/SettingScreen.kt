@@ -57,7 +57,7 @@ fun SettingScreen(
 			iconResId = if (uiMode.isInLightTheme()) R.drawable.ic_sun else R.drawable.ic_moon,
 			showValue = true
 		),
-		BasicPreference(
+	/*	BasicPreference(
 			key = "forward_backward",
 			title = stringResource(id = R.string.forward_backward_duration),
 			value = stringResource(
@@ -79,7 +79,7 @@ fun SettingScreen(
 			key = "scan_options",
 			title = stringResource(id = R.string.scan_options),
 			iconResId = R.drawable.ic_song_scan,
-		)
+		)*/
 	)
 	
 	var showSkipForwardBackwardPopup by remember { mutableStateOf(false) }
@@ -151,9 +151,7 @@ fun SettingScreen(
 						preferences[2].key -> {
 							showSkipForwardBackwardPopup = true
 						}
-						preferences[3].key -> {
-							navController.navigate(MusicomposeDestination.ScanOptions.route)
-						}
+
 					}
 				}
 			)
