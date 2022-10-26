@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'com.anafthdev.musicompose2'
+    namespace 'com.ringtones.compose'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.anafthdev.musicompose2"
+        applicationId "com.ringtones.compose"
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -130,5 +130,5 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 
 
-    implementation 'com.google.android.gms:play-services-ads:20.5.0'
+    implementation 'com.google.android.gms:play-services-ads:21.3.0'
 }
