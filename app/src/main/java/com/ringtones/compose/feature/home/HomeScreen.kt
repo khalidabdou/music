@@ -58,11 +58,11 @@ fun HomeScreen(navController: NavController) {
 				onClick = {
 				songController?.play(song)
 				showInterstitial(context)
-					if (musicomposeState.currentSongPlayed.isNotDefault()) {
+					/*if (musicomposeState.currentSongPlayed.isNotDefault()) {
 						navController.navigate(
 							MusicomposeDestination.BottomSheet.MusicPlayer.route
 						)
-					}
+					}*/
 				},
 				onFavoriteClicked = { isFavorite ->
 					songController?.updateSong(

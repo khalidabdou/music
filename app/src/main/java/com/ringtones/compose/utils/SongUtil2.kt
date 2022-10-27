@@ -38,7 +38,7 @@ object SongUtil2 {
                 albumID = "albumId",
                 duration = duration!!.toLong(),
                 albumPath = "albumPath.toString()",
-                path = "android.resource://com.anafthdev.musicompose2/" + Mysong.raw,
+                path = "android.resource://${context.packageName}/" + Mysong.raw,
                 dateAdded = 10000
             )
             songList.add(song)

@@ -33,7 +33,7 @@ fun MainScreen(
     navController: NavController
 ) {
 
-    val songController = LocalSongController.current
+    //val songController = LocalSongController.current
     val context = LocalContext.current
 
     val scope = rememberCoroutineScope()
@@ -93,6 +93,7 @@ fun MainScreen(
                             options = listOf(
                                 stringResource(id = R.string.rate),
                                 stringResource(id = R.string.privacy),
+                                stringResource(id = R.string.share),
 
                             ),
                             onDismissRequest = {
@@ -105,6 +106,9 @@ fun MainScreen(
                                     }
                                     1->{
                                         AppUtil.privacy(context)
+                                    }
+                                    2->{
+                                        AppUtil.share(context)
                                     }
 
                                 }

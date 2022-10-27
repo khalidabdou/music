@@ -74,7 +74,7 @@
 
 
     <string name="success_ringtone">Ringtone set Success</string>
-    <string name="success_alarm">Alarme Set Success</string>
+    <string name="success_alarm">Set Success</string>
     <string name="Ringtone">Ringtone</string>
     <string name="Alarm">Alarm</string>
     <string name="Notifications">Notifications</string>
@@ -85,6 +85,8 @@
     <string name="ad_id_banner" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="ad_id_interstitial" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
     <string name="ad_open_app" translatable="false">ca-app-pub-3940256099942544/3419835294</string>
+    <string name="share">Share App</string>
+    <string name="send_to">Enjoy this app </string>
 
 
 </resources>

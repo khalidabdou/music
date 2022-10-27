@@ -1,10 +1,12 @@
 package com.ringtones.compose.feature.music_player_sheet
 
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
+import android.provider.MediaStore
 import android.provider.Settings
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
@@ -52,6 +54,7 @@ import com.ringtones.compose.foundation.extension.toast
 import com.ringtones.compose.foundation.theme.Inter
 import com.ringtones.compose.utils.AppUtil.IS_RINGTONE
 import kotlinx.coroutines.launch
+import java.io.File
 import kotlin.time.Duration.Companion.milliseconds
 
 
@@ -297,9 +300,7 @@ fun OtherButtons(
     onBackwardClicked: () -> Unit,
     onForwardClicked: () -> Unit,
     onShuffleClicked: () -> Unit,
-    onSetAlarm: () -> Unit,
-    onSetRingtone: () -> Unit,
-    onSetNotifications: () -> Unit,
+    onSet: (Int) -> Unit,
     context: Context
 ) {
     Column(
@@ -398,15 +399,15 @@ fun OtherButtons(
 
             ) {
                 BoxSetAs(R.drawable.ring, title = stringResource(R.string.Ringtone)) {
-                    onSetRingtone()
+                    onSet(RingtoneManager.TYPE_RINGTONE)
                     showInterstitial(context)
                 }
                 BoxSetAs(R.drawable.alarm, title = stringResource(R.string.Alarm)) {
-                    onSetAlarm()
+                    onSet(RingtoneManager.TYPE_ALARM)
                     showInterstitial(context)
                 }
                 BoxSetAs(R.drawable.notifications, title = stringResource(R.string.Notifications)) {
-                    onSetNotifications()
+                    onSet(RingtoneManager.TYPE_NOTIFICATION)
                     showInterstitial(context)
                 }
             }
@@ -591,6 +592,7 @@ private fun MotionContent(
                     )
                 },
                 onBackwardClicked = {
+
                     showInterstitial(context)
                     songController?.backward()
                 },
@@ -602,15 +604,17 @@ private fun MotionContent(
                     showInterstitial(context)
                     songController?.setShuffled(!musicomposeState.isShuffled)
                 },
-                onSetAlarm = {
-
+                onSet = {
+                    //Toast.makeText(context,it.toString(),Toast.LENGTH_SHORT).show()
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         if (Settings.System.canWrite(context)) {
+                            //val k = File(musicomposeState.currentSongPlayed.path)
+
                             RingtoneManager.setActualDefaultRingtoneUri(
                                 context,
-                                RingtoneManager.TYPE_ALARM,
+                                it,
                                 musicomposeState.currentSongPlayed.path.toUri()
-                            )
+                            );
 
                             context.getString(R.string.success_alarm).toast(
                                 context = context,
@@ -628,58 +632,7 @@ private fun MotionContent(
 
                     }
                 },
-                onSetRingtone = {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (Settings.System.canWrite(context)) {
-                            RingtoneManager.setActualDefaultRingtoneUri(
-                                context,
-                                RingtoneManager.TYPE_ALARM,
-                                musicomposeState.currentSongPlayed.path.toUri()
-                            )
 
-                            context.getString(R.string.success_ringtone)
-                                .toast(
-                                    context = context,
-                                    length = Toast.LENGTH_LONG
-                                )
-                        } else {
-                            openAndroidPermissionsMenu(context)
-                        }
-                    } else {
-                        RingtoneManager.setActualDefaultRingtoneUri(
-                            context,
-                            RingtoneManager.TYPE_RINGTONE,
-                            musicomposeState.currentSongPlayed.path.toUri()
-                        )
-
-                    }
-                },
-                onSetNotifications = {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (Settings.System.canWrite(context)) {
-                            RingtoneManager.setActualDefaultRingtoneUri(
-                                context,
-                                RingtoneManager.TYPE_ALARM,
-                                musicomposeState.currentSongPlayed.path.toUri()
-                            )
-
-                            context.getString(R.string.success_ringtone)
-                                .toast(
-                                    context = context,
-                                    length = Toast.LENGTH_LONG
-                                )
-                        } else {
-                            openAndroidPermissionsMenu(context)
-                        }
-                    } else {
-                        RingtoneManager.setActualDefaultRingtoneUri(
-                            context,
-                            RingtoneManager.TYPE_NOTIFICATION,
-                            musicomposeState.currentSongPlayed.path.toUri()
-                        )
-
-                    }
-                },
                 context = context
             )
         }

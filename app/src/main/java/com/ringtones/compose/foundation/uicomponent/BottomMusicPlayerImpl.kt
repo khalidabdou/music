@@ -42,6 +42,7 @@ fun BoxScope.BottomMusicPlayerImpl(
 			currentSong = musicomposeState.currentSongPlayed,
 			currentDuration = musicomposeState.currentDuration,
 			onClick = {
+
 				if (musicomposeState.currentSongPlayed.isNotDefault()) {
 					navController.navigate(
 						MusicomposeDestination.BottomSheet.MusicPlayer.route
