@@ -23,7 +23,6 @@ class MusicomposeViewModel @Inject constructor(
 	environment
 ) {
 
-	
 	private val serviceIntent = Intent(context, MediaPlayerService::class.java).apply {
 		putExtra("musicomposeState", state.value)
 	}

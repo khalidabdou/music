@@ -1,12 +1,10 @@
 package com.ringtones.compose.feature.music_player_sheet
 
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
-import android.provider.MediaStore
 import android.provider.Settings
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
@@ -14,7 +12,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material3.*
 import androidx.compose.material3.Icon
@@ -54,7 +51,6 @@ import com.ringtones.compose.foundation.extension.toast
 import com.ringtones.compose.foundation.theme.Inter
 import com.ringtones.compose.utils.AppUtil.IS_RINGTONE
 import kotlinx.coroutines.launch
-import java.io.File
 import kotlin.time.Duration.Companion.milliseconds
 
 
@@ -76,6 +72,7 @@ fun MusicPlayerSheetScreen(
     val scaffoldState = rememberBottomSheetScaffoldState(
         bottomSheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
     )
+    val songController = LocalSongController.current
 
     val moreOptionSheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
@@ -104,18 +101,169 @@ fun MusicPlayerSheetScreen(
 
         }
     ) { innerPadding ->
-        LazyColumn(
-            contentPadding = innerPadding,
+//        LazyColumn(
+//            contentPadding = innerPadding,
+//            modifier = Modifier
+//                .fillMaxSize()
+//        ) {
+//            item {
+//                MotionContent(
+//                    musicomposeState = musicomposeState,
+//                    background = bottomSheetLayoutConfig.sheetBackgroundColor,
+//                )
+//            }
+//        }
+        Column(
             modifier = Modifier
-                .fillMaxSize()
+                .padding(bottom = innerPadding.calculateBottomPadding())
+                .background(bottomSheetLayoutConfig.sheetBackgroundColor)
         ) {
-            item {
-                MotionContent(
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1.0f)
+                    .padding(top = 30.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                AlbumImage(
+                    albumPath = musicomposeState.currentSongPlayed.albumPath,
+                    modifier = Modifier
+                        .size(150.dp)
+                        .aspectRatio(1f, true)
+                )
+            }
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier.fillMaxWidth()
+
+            ) {
+
+
+                Text(
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    text = musicomposeState.currentSongPlayed.title,
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.titleLarge.copy(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = MaterialTheme.typography.titleLarge.fontSize
+
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth(0.7f)
+                )
+
+                Text(
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    text = musicomposeState.currentSongPlayed.artist,
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        fontFamily = Inter,
+                        fontSize =
+                        MaterialTheme.typography.titleMedium.fontSize
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth(0.7f)
+                )
+            }
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.weight(1.0f)
+
+            ) {
+                Spacer(modifier = Modifier.height(24.dp))
+                SongProgress(
+                    maxDuration = musicomposeState.currentSongPlayed.duration,
+                    currentDuration = musicomposeState.currentDuration,
+                    onChange = { progress ->
+                        val duration =
+                            progress * musicomposeState.currentSongPlayed.duration
+                        songController?.snapTo(duration.toLong())
+                    }
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                SongControlButtons(
+                    isPlaying = musicomposeState.isPlaying,
+                    onPrevious = {
+                        showInterstitial(context)
+                        songController?.previous()
+                    },
+                    onPlayPause = {
+                        showInterstitial(context)
+                        if (musicomposeState.isPlaying) songController?.pause()
+                        else songController?.resume()
+                    },
+                    onNext = {
+                        showInterstitial(context)
+                        songController?.next()
+                    }
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                OtherButtons(
                     musicomposeState = musicomposeState,
-                    background = bottomSheetLayoutConfig.sheetBackgroundColor,
+                    onPlaybackModeClicked = {
+                        showInterstitial(context)
+                        songController?.changePlaybackMode()
+                    },
+                    onFavoriteClicked = {
+                        showInterstitial(context)
+                        songController?.updateSong(
+                            musicomposeState.currentSongPlayed.copy(
+                                isFavorite = !musicomposeState.currentSongPlayed.isFavorite
+                            )
+                        )
+                    },
+                    onBackwardClicked = {
+
+                        showInterstitial(context)
+                        songController?.backward()
+                    },
+                    onForwardClicked = {
+                        showInterstitial(context)
+                        songController?.forward()
+                    },
+                    onShuffleClicked = {
+                        showInterstitial(context)
+                        songController?.setShuffled(!musicomposeState.isShuffled)
+                    },
+                    onSet = {
+                        //Toast.makeText(context,it.toString(),Toast.LENGTH_SHORT).show()
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            if (Settings.System.canWrite(context)) {
+                                //val k = File(musicomposeState.currentSongPlayed.path)
+
+                                RingtoneManager.setActualDefaultRingtoneUri(
+                                    context,
+                                    it,
+                                    musicomposeState.currentSongPlayed.path.toUri()
+                                )
+
+                                context.getString(R.string.success_alarm).toast(
+                                    context = context,
+                                    length = Toast.LENGTH_LONG
+                                )
+                            } else {
+                                openAndroidPermissionsMenu(context)
+                            }
+                        } else {
+                            RingtoneManager.setActualDefaultRingtoneUri(
+                                context,
+                                RingtoneManager.TYPE_ALARM,
+                                musicomposeState.currentSongPlayed.path.toUri()
+                            )
+
+                        }
+                    },
+
+                    context = context
                 )
             }
         }
+
     }
 
 
@@ -411,7 +559,6 @@ fun OtherButtons(
                     showInterstitial(context)
                 }
             }
-
     }
 
 
@@ -463,7 +610,7 @@ private fun BoxSetAs(
 
 @OptIn(
     ExperimentalMotionApi::class,
-    ExperimentalPermissionsApi::class,
+    ExperimentalPermissionsApi::class, ExperimentalMaterial3Api::class,
 )
 @Composable
 private fun MotionContent(
@@ -485,158 +632,159 @@ private fun MotionContent(
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
-
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(background)
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(250.dp)
-                .padding(top = 30.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            AlbumImage(
-                albumPath = musicomposeState.currentSongPlayed.albumPath,
-                modifier = Modifier
-                    .size(150.dp)
-                    .aspectRatio(1f, true)
-            )
-        }
-
+    Scaffold(
+        scaffoldState = scaffoldState,
+        modifier = Modifier.background(Color.White)
+    ) { paddingValues ->
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceEvenly,
-            modifier = Modifier.fillMaxWidth()
-
-        ) {
-
-
-            Text(
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                text = musicomposeState.currentSongPlayed.title,
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.titleLarge.copy(
-                    fontWeight = FontWeight.Bold,
-                    fontSize = MaterialTheme.typography.titleLarge.fontSize
-
-                ),
-                modifier = Modifier
-                    .fillMaxWidth(0.7f)
-            )
-
-            Text(
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                text = musicomposeState.currentSongPlayed.artist,
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.titleMedium.copy(
-                    fontFamily = Inter,
-                    fontSize =
-                    MaterialTheme.typography.titleMedium.fontSize
-                ),
-                modifier = Modifier
-                    .fillMaxWidth(0.7f)
-            )
-        }
-
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-
+                .padding(bottom = paddingValues.calculateBottomPadding())
+                .background(Color.Red)
         ) {
-            Spacer(modifier = Modifier.height(24.dp))
-            SongProgress(
-                maxDuration = musicomposeState.currentSongPlayed.duration,
-                currentDuration = musicomposeState.currentDuration,
-                onChange = { progress ->
-                    val duration =
-                        progress * musicomposeState.currentSongPlayed.duration
-                    songController?.snapTo(duration.toLong())
-                }
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            SongControlButtons(
-                isPlaying = musicomposeState.isPlaying,
-                onPrevious = {
-                    showInterstitial(context)
-                    songController?.previous()
-                },
-                onPlayPause = {
-                    showInterstitial(context)
-                    if (musicomposeState.isPlaying) songController?.pause()
-                    else songController?.resume()
-                },
-                onNext = {
-                    showInterstitial(context)
-                    songController?.next()
-                }
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            OtherButtons(
-                musicomposeState = musicomposeState,
-                onPlaybackModeClicked = {
-                    showInterstitial(context)
-                    songController?.changePlaybackMode()
-                },
-                onFavoriteClicked = {
-                    showInterstitial(context)
-                    songController?.updateSong(
-                        musicomposeState.currentSongPlayed.copy(
-                            isFavorite = !musicomposeState.currentSongPlayed.isFavorite
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 30.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                AlbumImage(
+                    albumPath = musicomposeState.currentSongPlayed.albumPath,
+                    modifier = Modifier
+                        .size(150.dp)
+                        .aspectRatio(1f, true)
+                )
+            }
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier.fillMaxWidth()
+
+            ) {
+
+
+                Text(
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    text = musicomposeState.currentSongPlayed.title,
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.titleLarge.copy(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = MaterialTheme.typography.titleLarge.fontSize
+
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth(0.7f)
+                )
+
+                Text(
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    text = musicomposeState.currentSongPlayed.artist,
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        fontFamily = Inter,
+                        fontSize =
+                        MaterialTheme.typography.titleMedium.fontSize
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth(0.7f)
+                )
+            }
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+
+            ) {
+                Spacer(modifier = Modifier.height(24.dp))
+                SongProgress(
+                    maxDuration = musicomposeState.currentSongPlayed.duration,
+                    currentDuration = musicomposeState.currentDuration,
+                    onChange = { progress ->
+                        val duration =
+                            progress * musicomposeState.currentSongPlayed.duration
+                        songController?.snapTo(duration.toLong())
+                    }
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                SongControlButtons(
+                    isPlaying = musicomposeState.isPlaying,
+                    onPrevious = {
+                        showInterstitial(context)
+                        songController?.previous()
+                    },
+                    onPlayPause = {
+                        showInterstitial(context)
+                        if (musicomposeState.isPlaying) songController?.pause()
+                        else songController?.resume()
+                    },
+                    onNext = {
+                        showInterstitial(context)
+                        songController?.next()
+                    }
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                OtherButtons(
+                    musicomposeState = musicomposeState,
+                    onPlaybackModeClicked = {
+                        showInterstitial(context)
+                        songController?.changePlaybackMode()
+                    },
+                    onFavoriteClicked = {
+                        showInterstitial(context)
+                        songController?.updateSong(
+                            musicomposeState.currentSongPlayed.copy(
+                                isFavorite = !musicomposeState.currentSongPlayed.isFavorite
+                            )
                         )
-                    )
-                },
-                onBackwardClicked = {
+                    },
+                    onBackwardClicked = {
 
-                    showInterstitial(context)
-                    songController?.backward()
-                },
-                onForwardClicked = {
-                    showInterstitial(context)
-                    songController?.forward()
-                },
-                onShuffleClicked = {
-                    showInterstitial(context)
-                    songController?.setShuffled(!musicomposeState.isShuffled)
-                },
-                onSet = {
-                    //Toast.makeText(context,it.toString(),Toast.LENGTH_SHORT).show()
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (Settings.System.canWrite(context)) {
-                            //val k = File(musicomposeState.currentSongPlayed.path)
+                        showInterstitial(context)
+                        songController?.backward()
+                    },
+                    onForwardClicked = {
+                        showInterstitial(context)
+                        songController?.forward()
+                    },
+                    onShuffleClicked = {
+                        showInterstitial(context)
+                        songController?.setShuffled(!musicomposeState.isShuffled)
+                    },
+                    onSet = {
+                        //Toast.makeText(context,it.toString(),Toast.LENGTH_SHORT).show()
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            if (Settings.System.canWrite(context)) {
+                                //val k = File(musicomposeState.currentSongPlayed.path)
 
+                                RingtoneManager.setActualDefaultRingtoneUri(
+                                    context,
+                                    it,
+                                    musicomposeState.currentSongPlayed.path.toUri()
+                                )
+
+                                context.getString(R.string.success_alarm).toast(
+                                    context = context,
+                                    length = Toast.LENGTH_LONG
+                                )
+                            } else {
+                                openAndroidPermissionsMenu(context)
+                            }
+                        } else {
                             RingtoneManager.setActualDefaultRingtoneUri(
                                 context,
-                                it,
+                                RingtoneManager.TYPE_ALARM,
                                 musicomposeState.currentSongPlayed.path.toUri()
-                            );
-
-                            context.getString(R.string.success_alarm).toast(
-                                context = context,
-                                length = Toast.LENGTH_LONG
                             )
-                        } else {
-                            openAndroidPermissionsMenu(context)
+
                         }
-                    } else {
-                        RingtoneManager.setActualDefaultRingtoneUri(
-                            context,
-                            RingtoneManager.TYPE_ALARM,
-                            musicomposeState.currentSongPlayed.path.toUri()
-                        )
+                    },
 
-                    }
-                },
-
-                context = context
-            )
+                    context = context
+                )
+            }
         }
-
     }
 }
 
@@ -646,9 +794,4 @@ private fun openAndroidPermissionsMenu(context: Context) {
     intent.data = Uri.parse("package:" + context.packageName)
     context.startActivity(intent)
 }
-
-
-
-
-
 

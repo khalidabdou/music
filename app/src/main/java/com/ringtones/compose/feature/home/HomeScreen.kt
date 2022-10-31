@@ -30,13 +30,14 @@ fun HomeScreen(navController: NavController) {
 	val songController = LocalSongController.current
 	val musicomposeState = LocalMusicomposeState.current
 	val context= LocalContext.current
+
 	
 	val viewModel = hiltViewModel<HomeViewModel>()
 	//loadInterstitial(context)
 	LazyColumn(
 		modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+			.fillMaxSize()
+			.background(MaterialTheme.colorScheme.background)
 	) {
 		
 		/*item {
@@ -58,11 +59,11 @@ fun HomeScreen(navController: NavController) {
 				onClick = {
 				songController?.play(song)
 				showInterstitial(context)
-					/*if (musicomposeState.currentSongPlayed.isNotDefault()) {
+					if (musicomposeState.currentSongPlayed.isNotDefault()) {
 						navController.navigate(
 							MusicomposeDestination.BottomSheet.MusicPlayer.route
 						)
-					}*/
+					}
 				},
 				onFavoriteClicked = { isFavorite ->
 					songController?.updateSong(
