@@ -11,7 +11,6 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material3.*
@@ -23,7 +22,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -195,8 +193,13 @@ fun MusicPlayerSheetScreen(
                     },
                     onPlayPause = {
                         showInterstitial(context)
-                        if (musicomposeState.isPlaying) songController?.pause()
-                        else songController?.resume()
+                        if (musicomposeState.isPlaying) {
+                            songController?.pause()
+                            //Log.d("isPlaying","pause")
+                        } else {
+                            songController?.play(musicomposeState.currentSongPlayed)
+                            //Log.d("isPlaying","resume")
+                        }
                     },
                     onNext = {
                         showInterstitial(context)
@@ -542,7 +545,8 @@ fun OtherButtons(
         if (IS_RINGTONE)
             Row(
                 horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .padding(top = 4.dp)
 
             ) {
@@ -576,7 +580,9 @@ private fun BoxSetAs(
             containerColor = MaterialTheme.colorScheme.primaryContainer
         ),
         shape = MaterialTheme.shapes.large,
-        modifier = Modifier.width(90.dp).padding(2.dp)
+        modifier = Modifier
+            .width(90.dp)
+            .padding(2.dp)
             .clickable {
                 onlClick()
             }
