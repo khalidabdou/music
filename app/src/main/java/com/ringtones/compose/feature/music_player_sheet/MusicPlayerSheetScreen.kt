@@ -11,6 +11,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material3.*
@@ -121,7 +122,7 @@ fun MusicPlayerSheetScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1.0f)
+                    .weight(0.8f)
                     .padding(top = 30.dp),
                 contentAlignment = Alignment.Center
             ) {
@@ -175,7 +176,7 @@ fun MusicPlayerSheetScreen(
                 modifier = Modifier.weight(1.0f)
 
             ) {
-                Spacer(modifier = Modifier.height(24.dp))
+
                 SongProgress(
                     maxDuration = musicomposeState.currentSongPlayed.duration,
                     currentDuration = musicomposeState.currentDuration,
@@ -541,8 +542,7 @@ fun OtherButtons(
         if (IS_RINGTONE)
             Row(
                 horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier
-                    .fillMaxWidth()
+                modifier = Modifier.fillMaxWidth()
                     .padding(top = 4.dp)
 
             ) {
@@ -576,19 +576,15 @@ private fun BoxSetAs(
             containerColor = MaterialTheme.colorScheme.primaryContainer
         ),
         shape = MaterialTheme.shapes.large,
-        modifier = Modifier
-            .size(width = 80.dp, height = 50.dp)
+        modifier = Modifier.width(90.dp).padding(2.dp)
             .clickable {
                 onlClick()
             }
     ) {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth()
             ) {
                 Icon(
                     painter = painterResource(
@@ -602,7 +598,6 @@ private fun BoxSetAs(
                         fontFamily = Inter
                     )
                 )
-            }
         }
     }
 }
@@ -612,6 +607,7 @@ private fun BoxSetAs(
     ExperimentalMotionApi::class,
     ExperimentalPermissionsApi::class, ExperimentalMaterial3Api::class,
 )
+/*
 @Composable
 private fun MotionContent(
 
@@ -787,6 +783,7 @@ private fun MotionContent(
         }
     }
 }
+*/
 
 
 private fun openAndroidPermissionsMenu(context: Context) {

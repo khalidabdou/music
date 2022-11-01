@@ -77,7 +77,7 @@
     <string name="success_alarm">Set Success</string>
     <string name="Ringtone">Ringtone</string>
     <string name="Alarm">Alarm</string>
-    <string name="Notifications">Notifications</string>
+    <string name="Notifications">Notification</string>
 
     <string name="privacy_url" translatable="false">https://stackoverflow.com/</string>
 
